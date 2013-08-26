@@ -15,72 +15,87 @@
 {
     [super viewDidLoad];
     
-    /*
+    //个数少用冒泡更快。可以解决相等对象的问题。
+    //个数多用快排更快。有多个相等对象的时候，只会保留一个，bug...
     
-//    NSMutableArray *array = [[[NSMutableArray alloc] initWithObjects:@"8655", @"1347",@"257",@"2557",@"8967",@"757",@"97",@"712", @"7",nil] autorelease];
-    NSMutableArray *array = [[[NSMutableArray alloc] initWithObjects:@"7", @"1347",@"257",@"2557",@"8967",@"757",@"97",@"712",@"715954",@"7626",@"173",@"557",@"797",@"715",@"17",@"7087655",@"7087",@"1372",@"719867",@"70",@"1557",@"78685",@"7655",@"15677",@"287",@"70776",@"7765",@"70784",@"7844",@"7036",@"798",@"170762",@"7283955",@"9759457",@"15667",@"56267",@"6627",@"477",@"72",nil] autorelease];
+    int totalNum = 9;
+    TestObject *obj[totalNum];
+    NSMutableArray *mutableArray = [NSMutableArray array];
     
-    //
-    //个数少用冒泡更快
-    //个数多用快排更快
-    // 
+    for (int i = 0; i < totalNum; i++)
+    {
+        obj[i] = [[[TestObject alloc] init] autorelease];
+        [mutableArray addObject:obj[i]];
+    }
     
+    obj[0].value = 1136;
+    obj[1].value = 1021;
+    obj[2].value = 10;
+    obj[3].value = 791;
+    obj[4].value = 7;
     
-    [self bubbleSortWith:array];
+    // QUICK SORT
+    for (int i = 0; i < [mutableArray count]; i++)
+    {
+        TestObject *object = [mutableArray objectAtIndex:i];
+        NSLog(@"quickUnsortArray%d: %d", i, object.value);
+    }
     
     //time start
     NSDate* tmpStartData = [[NSDate date] retain];
     
-    NSArray *sortedArray = [self quickSort:array];
+    NSArray *quickSortedArray = [self quickSortObjectArray:mutableArray];
     
-    //time end
     double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
     NSLog(@">>>>>>>>>> QuickSort cost time = %f ms", deltaTime*1000);
     [tmpStartData release];
+    //time end
     
-    NSLog(@"QuickSort sorted array is %@", sortedArray);
-
-    */
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    TestObject *obj1 = [[[TestObject alloc] init] autorelease];
-    TestObject *obj2 = [[[TestObject alloc] init] autorelease];
-    TestObject *obj3 = [[[TestObject alloc] init] autorelease];
-    TestObject *obj4 = [[[TestObject alloc] init] autorelease];
-    TestObject *obj5 = [[[TestObject alloc] init] autorelease];
-    obj1.value = 1021;
-    obj2.value = 10;
-    obj3.value = 791;
-    obj4.value = 121;
-    obj5.value = 7;
+    for (int i = 0; i < [quickSortedArray count]; i++)
+    {
+        TestObject *object = [quickSortedArray objectAtIndex:i];
+        NSLog(@"quickSortedArray%d: %d", i, object.value);
+    }
     
-    NSMutableArray *mutableArray = [NSMutableArray array];
-    [mutableArray addObject:obj1];
-    [mutableArray addObject:obj2];
-    [mutableArray addObject:obj3];
-    [mutableArray addObject:obj4];
-    [mutableArray addObject:obj5];
+    NSLog(@"======================");
     
-    [self quickSortObjectArray:mutableArray];
-}
-
--(void)bubbleSortWith:(NSMutableArray *)array
-{
+    // BUBBLE SORT 
+    for (int i = 0; i < [mutableArray count]; i++)
+    {
+        TestObject *object = [mutableArray objectAtIndex:i];
+        NSLog(@"bubbleUnsortArray%d: %d", i, object.value);
+    }
+    
     //time start
-    NSDate* tmpStartData = [[NSDate date] retain];
+    NSDate* tmpStartData2 = [[NSDate date] retain];
     
+    NSMutableArray *bubbleSortedArray = [self bubbleSortObjectArray:mutableArray];
+    
+    double deltaTime2 = [[NSDate date] timeIntervalSinceDate:tmpStartData2];
+    NSLog(@">>>>>>>>>> BubbleSort cost time = %f ms", deltaTime2*1000);
+    [tmpStartData2 release];
+    //time end
+    
+    for (int i = 0; i < [bubbleSortedArray count]; i++)
+    {
+        TestObject *object = [bubbleSortedArray objectAtIndex:i];
+        NSLog(@"bubbleSortedArray%d: %d", i, object.value);
+    }
+}
+
+-(NSMutableArray*)bubbleSortObjectArray:(NSMutableArray*)unsortedArray
+{
     int i, j, min;
-    NSString *temp;
-    for (i = 0; i < [array count]; i++)
+    TestObject *tempObject;
+    for (i = 0; i < [unsortedArray count]; i++)
     {
         min = i;
         
-        for (j = [array count] - 1; j > i; j--)
+        for (j = [unsortedArray count] - 1; j > i; j--)
         {
-            if ([[array objectAtIndex:j] integerValue] < [[array objectAtIndex:min] integerValue])
+            TestObject *testObj = [unsortedArray objectAtIndex:j];
+            TestObject *minObj = [unsortedArray objectAtIndex:min];
+            if (testObj.value < minObj.value)
             {
                 min = j;
             }
@@ -88,60 +103,16 @@
         
         if (i != min)
         {
-            temp = [array objectAtIndex:i];
-            [array replaceObjectAtIndex:i withObject:[array objectAtIndex:min]];
-            [array replaceObjectAtIndex:min withObject:temp];
+            tempObject = [unsortedArray objectAtIndex:i];
+            [unsortedArray replaceObjectAtIndex:i withObject:[unsortedArray objectAtIndex:min]];
+            [unsortedArray replaceObjectAtIndex:min withObject:tempObject];
         }
     }
-    //time end
-    double deltaTime = [[NSDate date] timeIntervalSinceDate:tmpStartData];
-    NSLog(@">>>>>>>>>> bubbleSort cost time = %f ms", deltaTime*1000);
-    [tmpStartData release];
-    
-    NSLog(@"BubbleSort sorted array is %@", array);
-}
-
--(NSArray*)quickSort:(NSArray*)unsortedArray
-{
-    NSInteger numberOfElements = [unsortedArray count];
-    if(numberOfElements <= 1)
-    {
-        return unsortedArray;
-    }
-    
-    NSNumber* pivotValue = [unsortedArray objectAtIndex: numberOfElements/2];
-    
-    NSMutableArray* lessArray = [[[NSMutableArray alloc] initWithCapacity:numberOfElements] autorelease];
-    NSMutableArray* moreArray = [[[NSMutableArray alloc] initWithCapacity:numberOfElements] autorelease];
-    
-    for (NSNumber* value in unsortedArray)
-    {
-        if([value floatValue] < [pivotValue floatValue])
-        {
-            [lessArray addObject:value];
-        }
-        else if([value floatValue] > [pivotValue floatValue])
-        {
-            [moreArray addObject:value];
-        }
-    }
-    
-    NSMutableArray* sortedArray = [[[NSMutableArray alloc] initWithCapacity:numberOfElements] autorelease];
-    [sortedArray addObjectsFromArray:[self quickSort:lessArray]];
-    [sortedArray addObject:pivotValue];
-    [sortedArray addObjectsFromArray:[self quickSort:moreArray]];
-    
-    return sortedArray;
+    return unsortedArray;
 }
 
 -(NSArray*)quickSortObjectArray:(NSArray*)unsortedArray
 {
-    for (int i = 0; i < [unsortedArray count]; i++)
-    {
-        TestObject *object = [unsortedArray objectAtIndex:i];
-        NSLog(@"unsortedArray%d: %d", i, object.value);
-    }
-    
     NSInteger numberOfElements = [unsortedArray count];
     if(numberOfElements <= 1)
     {
@@ -170,11 +141,6 @@
     [sortedArray addObject:pivotObject];
     [sortedArray addObjectsFromArray:[self quickSortObjectArray:moreArray]];
     
-    for (int i = 0; i < [sortedArray count]; i++)
-    {
-        TestObject *object = [sortedArray objectAtIndex:i];
-        NSLog(@"sortedArray%d: %d", i, object.value);
-    }
     return sortedArray;
 }
 
