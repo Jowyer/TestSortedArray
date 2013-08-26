@@ -18,6 +18,7 @@
 		2F95B38E17C703E000379728 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F95B38D17C703E000379728 /* Default-568h@2x.png */; };
 		2F95B39117C703E000379728 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F95B39017C703E000379728 /* ViewController.m */; };
 		2F95B39417C703E000379728 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F95B39217C703E000379728 /* ViewController.xib */; };
+		2F96FFFC17CB351500BAAB98 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F96FFFB17CB351500BAAB98 /* TestObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		2F95B38F17C703E000379728 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2F95B39017C703E000379728 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2F95B39317C703E000379728 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		2F96FFFA17CB351500BAAB98 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
+		2F96FFFB17CB351500BAAB98 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				2F95B38717C703E000379728 /* AppDelegate.m */,
 				2F95B38F17C703E000379728 /* ViewController.h */,
 				2F95B39017C703E000379728 /* ViewController.m */,
+				2F96FFFA17CB351500BAAB98 /* TestObject.h */,
+				2F96FFFB17CB351500BAAB98 /* TestObject.m */,
 				2F95B39217C703E000379728 /* ViewController.xib */,
 				2F95B37E17C703E000379728 /* Supporting Files */,
 			);
@@ -176,6 +181,7 @@
 				2F95B38417C703E000379728 /* main.m in Sources */,
 				2F95B38817C703E000379728 /* AppDelegate.m in Sources */,
 				2F95B39117C703E000379728 /* ViewController.m in Sources */,
+				2F96FFFC17CB351500BAAB98 /* TestObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +302,7 @@
 				2F95B39917C703E000379728 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
